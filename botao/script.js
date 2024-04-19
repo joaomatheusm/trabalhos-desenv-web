@@ -3,7 +3,7 @@
 const btn = document.querySelector('#no-button');
 
 function getButtonWidth() {
-    let buttonWidth = (btn.style.width).split('');
+    let buttonWidth = getComputedStyle(btn).width.split('');
     buttonWidth.splice(-2);
     buttonWidth = Number(buttonWidth.join(''));
 
@@ -11,18 +11,15 @@ function getButtonWidth() {
 }
 
 function getButtonHeight() {
-    let buttonWidth = (btn.style.width).split('');
-    buttonWidth.splice(-2);
-    buttonWidth = Number(buttonWidth.join(''));
+    let buttonHeight = getComputedStyle(btn).height.split('');
+    buttonHeight.splice(-2);
+    buttonHeight = Number(buttonHeight.join(''));
 
-    return buttonWidth;
+    return buttonHeight;
 }
 
-function init() {
-    btn.style.position = 'absolute';
-    btn.style.width = '80px';
-    btn.style.height = '30px';
-}
+console.log(getComputedStyle(btn).height);
+console.log(getButtonWidth());
 
 let windowWidth = innerWidth;
 let windowHeight = innerHeight;
@@ -33,7 +30,7 @@ window.addEventListener('resize', () => {
 });
 
 btn.addEventListener('click', () => {
-    init();
+    btn.style.position = 'absolute';
     btn.style.left = `${Math.floor(Math.random() * (windowWidth - getButtonWidth()))}px`;
     btn.style.top = `${Math.floor(Math.random() * (windowHeight - getButtonHeight()))}px`;
 });
